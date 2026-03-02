@@ -53,7 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname, site);
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.netlify.com https://plausible.io; frame-src 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.netlify.com https://plausible.io https://github.com; frame-src https://identity.netlify.com;" />
 
     <!-- Google Fonts - Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,6 +62,9 @@ const canonicalURL = new URL(Astro.url.pathname, site);
 
     <!-- AOS Animations CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Netlify Identity Widget for CMS Authentication -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <!-- Global Styles -->
     <link rel="stylesheet" href="/src/styles/global.css" />
@@ -81,6 +84,19 @@ const canonicalURL = new URL(Astro.url.pathname, site);
           once: true,
           offset: 100,
           disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        });
+      }
+    </script>
+
+    <!-- Netlify Identity Redirect Handler -->
+    <script is:inline>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
         });
       }
     </script>

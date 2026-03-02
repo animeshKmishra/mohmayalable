@@ -1,0 +1,195 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Netlify Identity authentication
+identity:
+  url: "https://mohmaya-elegance.netlify.app/.netlify/identity"
+
+# Local backend for development (optional)
+# Uncomment to enable local development mode
+# local_backend: true
+
+# Media files configuration
+media_folder: "public/images/sarees"
+public_folder: "/images/sarees"
+
+# Site URL for previews
+site_url: https://mohmaya-elegance.netlify.app
+display_url: https://mohmaya-elegance.netlify.app
+logo_url: https://mohmaya-elegance.netlify.app/images/logo.png
+
+# Collections
+collections:
+  - name: "products"
+    label: "Saree Products"
+    label_singular: "Saree Product"
+    folder: "src/content/products"
+    create: true
+    delete: true
+    slug: "{{fields.productId}}-{{slug}}"
+    identifier_field: "productId"
+    summary: "{{fields.productId}} - {{fields.title}} - ₹{{fields.price}}"
+    sortable_fields: ['productId', 'title', 'price', 'order', 'featured']
+    view_filters:
+      - label: "Featured Products"
+        field: featured
+        pattern: true
+      - label: "Available Products"
+        field: available
+        pattern: true
+      - label: "Sold Out"
+        field: available
+        pattern: false
+    fields:
+      # Product ID - Required, must follow MML-XXX format
+      - label: "Product ID"
+        name: "productId"
+        widget: "string"
+        hint: "Format: MML-001, MML-002, etc. Must be unique."
+        pattern: ['^MML-\d{3}$', "Must be in format MML-XXX (e.g., MML-001)"]
+        required: true
+
+      # Title - Required
+      - label: "Product Title"
+        name: "title"
+        widget: "string"
+        hint: "Example: Royal Blue Kanjeevaram Silk Saree"
+        required: true
+
+      # Price - Required, positive number
+      - label: "Price (₹)"
+        name: "price"
+        widget: "number"
+        value_type: "int"
+        min: 1
+        hint: "Enter price in rupees without symbols or commas (e.g., 15999 for ₹15,999)"
+        required: true
+
+      # Short Description - Required
+      - label: "Short Description"
+        name: "description"
+        widget: "string"
+        hint: "Brief one-line description (appears in product cards)"
+        required: true
+
+      # Main Image - Required
+      - label: "Main Product Image"
+        name: "image"
+        widget: "image"
+        choose_url: false
+        media_library:
+          config:
+            max_file_size: 5120000 # 5MB
+        hint: "Primary product photo. Recommended: 1200x1600px, high quality JPG or PNG"
+        required: true
+
+      # Gallery Images - Optional
+      - label: "Gallery Images"
+        name: "gallery"
+        widget: "list"
+        required: false
+        summary: "Image {{fields.image}}"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
+          choose_url: false
+          media_library:
+            config:
+              max_file_size: 5120000 # 5MB
+        hint: "Additional product photos (detail shots, close-ups, etc.)"
+
+      # Fabric Type - Required, dropdown
+      - label: "Fabric Type"
+        name: "fabric"
+        widget: "select"
+        options:
+          - { label: "Silk", value: "Silk" }
+          - { label: "Cotton", value: "Cotton" }
+          - { label: "Georgette", value: "Georgette" }
+          - { label: "Chiffon", value: "Chiffon" }
+          - { label: "Banarasi", value: "Banarasi" }
+          - { label: "Kanjeevaram", value: "Kanjeevaram" }
+          - { label: "Chanderi", value: "Chanderi" }
+          - { label: "Tussar", value: "Tussar" }
+          - { label: "Other", value: "Other" }
+        default: "Silk"
+        required: true
+
+      # Color - Required
+      - label: "Color"
+        name: "color"
+        widget: "string"
+        hint: "Main color (e.g., Royal Blue, Emerald Green)"
+        required: true
+
+      # Full Description - Rich text editor
+      - label: "Full Description"
+        name: "body"
+        widget: "markdown"
+        hint: "Detailed product description with formatting. Include fabric details, occasion, care instructions."
+        required: true
+        modes: ['raw', 'rich_text']
+        buttons:
+          - bold
+          - italic
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+
+      # Featured - Boolean toggle
+      - label: "Featured Product"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        hint: "Toggle ON to feature this product on the homepage"
+        required: false
+
+      # Available - Boolean toggle
+      - label: "Available for Purchase"
+        name: "available"
+        widget: "boolean"
+        default: true
+        hint: "Toggle OFF if sold out (will show 'Sold Out' badge)"
+        required: false
+
+      # Display Order - Number
+      - label: "Display Order"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        default: 0
+        hint: "Lower numbers appear first. Use: 10, 20, 30... (leaves room to insert later)"
+        required: false
+
+      # SEO Fields (Optional)
+      - label: "SEO Title (Optional)"
+        name: "seoTitle"
+        widget: "string"
+        hint: "Custom page title for search engines (leave blank to auto-generate)"
+        required: false
+
+      - label: "SEO Description (Optional)"
+        name: "seoDescription"
+        widget: "text"
+        hint: "Custom meta description for search engines (leave blank to use short description)"
+        required: false
+        pattern: ['^.{0,160}$', "Must be 160 characters or less"]
+
+# Editor settings
+editor:
+  preview: true
+
+# Publish mode
+publish_mode: editorial_workflow
+
+# Slug settings
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
