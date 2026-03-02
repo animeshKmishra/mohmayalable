@@ -1,17 +1,22 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <main id="main-content">
+    <div class="container section">
+      <div style="text-align: center; padding: 4rem 0;">
+        <img src="/images/logo.png" alt="MohMaya Logo" style="max-width: 200px; margin: 0 auto 2rem;" />
+        <h1 style="color: var(--color-primary-purple); margin-bottom: 1rem;">
+          MohMaya
+        </h1>
+        <h2 style="font-family: var(--font-body); font-weight: 300; color: var(--color-gold); margin-bottom: 2rem;">
+          Threads of Elegance
+        </h2>
+        <p style="max-width: 600px; margin: 0 auto; font-size: 1.25rem;">
+          Coming soon... An exquisite collection of custom-designed sarees, handcrafted with tradition and elegance.
+        </p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

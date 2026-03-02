@@ -1,1 +1,261 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================================
+   MohMaya - Threads of Elegance
+   Custom Styles & Variables
+   =================================== */
+
+/* Color Palette - Elegant Saree Theme */
+:root {
+  /* Primary Colors - Jewel Tones */
+  --color-primary-purple: #4A148C;
+  --color-primary-emerald: #1B5E20;
+  --color-primary-royal-blue: #1A237E;
+
+  /* Secondary Colors - Luxury Accents */
+  --color-gold: #FFD700;
+  --color-gold-light: #FFF4CC;
+  --color-rose-gold: #B76E79;
+
+  /* Background Colors */
+  --color-bg-cream: #FFF8E7;
+  --color-bg-white: #FFFFFF;
+  --color-bg-light: #FAFAFA;
+
+  /* Text Colors */
+  --color-text-primary: #2C2C2C;
+  --color-text-secondary: #5A5A5A;
+  --color-text-muted: #8A8A8A;
+
+  /* UI Colors */
+  --color-border: #E0E0E0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: 3rem; /* 48px */
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.25rem; /* 36px */
+}
+
+h3 {
+  font-size: 1.875rem; /* 30px */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+p {
+  font-size: 1.125rem; /* 18px */
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  color: var(--color-primary-purple);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-royal-blue);
+}
+
+/* Focus Styles - Accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Buttons Base */
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Smooth Transitions */
+* {
+  transition-property: color, background-color, border-color, transform, box-shadow, opacity;
+  transition-duration: var(--transition-base);
+  transition-timing-function: ease;
+}
+
+/* Remove transitions for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection Colors */
+::selection {
+  background-color: var(--color-gold-light);
+  color: var(--color-text-primary);
+}
+
+/* Scrollbar Styling (Webkit browsers) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rose-gold);
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section {
+  padding: var(--spacing-xl) 0;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.25rem; /* 36px */
+  }
+
+  h2 {
+    font-size: 1.875rem; /* 30px */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Loading State */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: wait;
+}
+
+/* Skip to Main Content - Accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary-purple);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
