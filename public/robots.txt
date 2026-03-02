@@ -1,0 +1,8 @@
+# robots.txt for MohMaya - Threads of Elegance
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+
+Sitemap: https://mohmaya-elegance.netlify.app/sitemap-index.xml
