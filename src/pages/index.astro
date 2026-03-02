@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 import Toast from '../components/Toast.astro';
+import ProductGrid from '../components/ProductGrid.astro';
 ---
 
 <BaseLayout>
@@ -18,30 +19,18 @@ import Toast from '../components/Toast.astro';
     <!-- Hero Section -->
     <Hero />
 
-    <!-- Products Section (Coming Soon) -->
+    <!-- Products Section -->
     <section id="products" class="products-section">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">
           Our Collection
         </h2>
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
-          Exquisite sarees are coming soon. Each piece will be showcased with love and attention to detail.
+          Discover our exquisite collection of handcrafted sarees. Each piece is a work of art, woven with tradition and elegance.
         </p>
-        <div class="coming-soon" data-aos="zoom-in" data-aos-delay="400">
-          <div class="coming-soon__icon">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-          </div>
-          <h3 class="coming-soon__title">Coming Soon</h3>
-          <p class="coming-soon__text">
-            We're curating an exquisite collection of sarees for you. Follow us on Instagram for updates!
-          </p>
-          <a href="https://www.instagram.com/mohmayalabel" target="_blank" rel="noopener noreferrer" class="btn btn--outline">
-            Follow on Instagram
-          </a>
-        </div>
+
+        <!-- Product Grid -->
+        <ProductGrid />
       </div>
     </section>
   </main>

@@ -1,0 +1,279 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  product: CollectionEntry<'products'>;
+  index?: number;
+}
+
+const { product, index = 0 } = Astro.props;
+const { data, slug } = product;
+
+// Format price with Indian number system
+const formattedPrice = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 0
+}).format(data.price);
+
+// AOS delay based on index
+const aosDelay = (index % 3) * 100;
+---
+
+<article
+  class="product-card"
+  data-aos="fade-up"
+  data-aos-delay={aosDelay}
+>
+  <a href={`/product/${slug}`} class="product-card__link">
+    <!-- Image Container -->
+    <div class="product-card__image-wrapper">
+      <Image
+        src={data.image}
+        alt={data.title}
+        class="product-card__image"
+        loading="lazy"
+        width={600}
+        height={800}
+      />
+
+      <!-- Badges -->
+      <div class="product-card__badges">
+        {data.featured && (
+          <span class="badge badge--featured">Featured</span>
+        )}
+        {!data.available && (
+          <span class="badge badge--sold-out">Sold Out</span>
+        )}
+      </div>
+
+      <!-- Hover Overlay -->
+      <div class="product-card__overlay">
+        <span class="product-card__view-details">View Details</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="product-card__content">
+      <!-- Product ID Badge -->
+      <span class="product-card__id">{data.productId}</span>
+
+      <!-- Title -->
+      <h3 class="product-card__title">{data.title}</h3>
+
+      <!-- Meta Info -->
+      <div class="product-card__meta">
+        {data.fabric && (
+          <span class="meta-tag meta-tag--fabric">{data.fabric}</span>
+        )}
+        {data.color && (
+          <span class="meta-tag meta-tag--color">{data.color}</span>
+        )}
+      </div>
+
+      <!-- Price -->
+      <div class="product-card__price">
+        <span class="price">{formattedPrice}</span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  /* Product Card */
+  .product-card {
+    position: relative;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+
+  .product-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-8px);
+  }
+
+  .product-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Image */
+  .product-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background-color: var(--color-bg-light);
+  }
+
+  .product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .product-card:hover .product-card__image {
+    transform: scale(1.08);
+  }
+
+  /* Badges */
+  .product-card__badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+  }
+
+  .badge--featured {
+    background-color: rgba(255, 215, 0, 0.9);
+    color: var(--color-primary-purple);
+  }
+
+  .badge--sold-out {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+
+  /* Overlay */
+  .product-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(74, 20, 140, 0) 0%,
+      rgba(74, 20, 140, 0.9) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .product-card:hover .product-card__overlay {
+    opacity: 1;
+  }
+
+  .product-card__view-details {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.75rem 2rem;
+    border: 2px solid white;
+    border-radius: var(--radius-lg);
+    background-color: transparent;
+    transition: all var(--transition-fast);
+  }
+
+  .product-card__overlay:hover .product-card__view-details {
+    background-color: white;
+    color: var(--color-primary-purple);
+  }
+
+  /* Content */
+  .product-card__content {
+    padding: 1.5rem;
+  }
+
+  .product-card__id {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Meta Tags */
+  .product-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.813rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-cream);
+    color: var(--color-text-secondary);
+  }
+
+  .meta-tag--fabric {
+    background-color: rgba(74, 20, 140, 0.1);
+    color: var(--color-primary-purple);
+  }
+
+  .meta-tag--color {
+    background-color: rgba(255, 215, 0, 0.15);
+    color: var(--color-primary-royal-blue);
+  }
+
+  /* Price */
+  .product-card__price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-purple);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .product-card__content {
+      padding: 1.25rem;
+    }
+
+    .product-card__title {
+      font-size: 1.25rem;
+    }
+
+    .price {
+      font-size: 1.25rem;
+    }
+  }
+</style>

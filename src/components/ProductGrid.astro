@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import ProductCard from './ProductCard.astro';
+
+// Fetch and sort products
+const allProducts = await getCollection('products');
+
+// Filter by available and featured if needed
+const products = allProducts
+  .filter(product => product.data.available) // Only show available products
+  .sort((a, b) => {
+    // Sort by: featured first, then by order, then by title
+    if (a.data.featured && !b.data.featured) return -1;
+    if (!a.data.featured && b.data.featured) return 1;
+    if (a.data.order !== b.data.order) return a.data.order - b.data.order;
+    return a.data.title.localeCompare(b.data.title);
+  });
+
+const hasProducts = products.length > 0;
+---
+
+<div class="product-grid-wrapper">
+  {hasProducts ? (
+    <div class="product-grid">
+      {products.map((product, index) => (
+        <ProductCard product={product} index={index} />
+      ))}
+    </div>
+  ) : (
+    <div class="empty-state" data-aos="fade-up">
+      <div class="empty-state__icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </div>
+      <h3 class="empty-state__title">No Products Available</h3>
+      <p class="empty-state__text">
+        Our exquisite collection is being curated. Check back soon or follow us on Instagram for updates!
+      </p>
+      <a
+        href="https://www.instagram.com/mohmayalabel"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--primary"
+      >
+        Follow on Instagram
+      </a>
+    </div>
+  )}
+</div>
+
+<style>
+  /* Product Grid Wrapper */
+  .product-grid-wrapper {
+    width: 100%;
+  }
+
+  /* Product Grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+  }
+
+  /* Responsive Grid */
+  @media (max-width: 640px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .empty-state__icon {
+    margin: 0 auto 2rem;
+    width: 80px;
+    height: 80px;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .empty-state__title {
+    font-family: var(--font-heading);
+    font-size: 1.875rem;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .empty-state__text {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    cursor: pointer;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(74, 20, 140, 0.3);
+  }
+</style>

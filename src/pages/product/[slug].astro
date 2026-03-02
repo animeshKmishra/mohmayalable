@@ -1,0 +1,487 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Toast from '../../components/Toast.astro';
+
+// Generate static paths for all products
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(product => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { data } = product;
+const { Content } = await product.render();
+
+// Format price
+const formattedPrice = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 0
+}).format(data.price);
+
+// SEO
+const pageTitle = data.seoTitle || `${data.title} | MohMaya`;
+const pageDescription = data.seoDescription || data.description.substring(0, 160);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={data.image.src}>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <Header />
+
+  <main id="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#products">Collection</a></li>
+            <li aria-current="page">{data.title}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Product Detail -->
+    <section class="product-detail">
+      <div class="container">
+        <div class="product-detail__grid">
+          <!-- Image Gallery -->
+          <div class="product-detail__images" data-aos="fade-right">
+            <!-- Main Image -->
+            <div class="main-image">
+              <Image
+                src={data.image}
+                alt={data.title}
+                width={800}
+                height={1066}
+                class="main-image__img"
+              />
+              {!data.available && (
+                <div class="sold-out-overlay">
+                  <span class="sold-out-badge">Sold Out</span>
+                </div>
+              )}
+            </div>
+
+            <!-- Gallery Thumbnails (if available) -->
+            {data.gallery && data.gallery.length > 0 && (
+              <div class="gallery-thumbnails">
+                {data.gallery.map((img, index) => (
+                  <div class="thumbnail">
+                    <Image
+                      src={img}
+                      alt={`${data.title} - View ${index + 2}`}
+                      width={150}
+                      height={200}
+                      class="thumbnail__img"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <!-- Product Info -->
+          <div class="product-detail__info" data-aos="fade-left">
+            <!-- Product ID -->
+            <span class="product-id">{data.productId}</span>
+
+            <!-- Title -->
+            <h1 class="product-title">{data.title}</h1>
+
+            <!-- Meta -->
+            <div class="product-meta">
+              {data.fabric && (
+                <span class="meta-tag meta-tag--fabric">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  </svg>
+                  {data.fabric}
+                </span>
+              )}
+              {data.color && (
+                <span class="meta-tag meta-tag--color">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  {data.color}
+                </span>
+              )}
+            </div>
+
+            <!-- Price -->
+            <div class="product-price">
+              <span class="price">{formattedPrice}</span>
+              {!data.available && (
+                <span class="availability availability--unavailable">Currently Unavailable</span>
+              )}
+              {data.available && (
+                <span class="availability availability--available">Available</span>
+              )}
+            </div>
+
+            <!-- Description -->
+            <div class="product-description prose">
+              <Content />
+            </div>
+
+            <!-- CTA -->
+            <div class="product-cta">
+              <button
+                id="inquire-btn"
+                class="btn btn--instagram"
+                data-product-id={data.productId}
+                data-product-name={data.title}
+                data-product-price={formattedPrice}
+                aria-label="Inquire about this product on Instagram"
+              >
+                <svg class="btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span>Inquire on Instagram</span>
+              </button>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="product-info-box">
+              <h3 class="info-box__title">Care Instructions</h3>
+              <ul class="info-box__list">
+                <li>Dry clean only for best results</li>
+                <li>Store in a cool, dry place</li>
+                <li>Avoid direct sunlight to prevent fading</li>
+                <li>Handle with care to preserve intricate work</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <Toast />
+</BaseLayout>
+
+<style>
+  /* Breadcrumb */
+  .breadcrumb-wrapper {
+    background-color: var(--color-bg-light);
+    padding: 1rem 0;
+    margin-top: 4.5rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb li:not(:last-child)::after {
+    content: '›';
+    margin-left: 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary-purple);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb li[aria-current="page"] {
+    color: var(--color-text-secondary);
+  }
+
+  /* Product Detail */
+  .product-detail {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .product-detail__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .product-detail__grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  /* Images */
+  .main-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-bg-light);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .main-image__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .sold-out-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sold-out-badge {
+    padding: 1rem 2rem;
+    background-color: white;
+    color: var(--color-text-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Gallery */
+  .gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .thumbnail {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+  }
+
+  .thumbnail:hover {
+    transform: scale(1.05);
+  }
+
+  .thumbnail__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Product Info */
+  .product-id {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.75rem;
+  }
+
+  .product-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 1.5rem;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
+    .product-title {
+      font-size: 2rem;
+    }
+  }
+
+  /* Meta Tags */
+  .product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.938rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-cream);
+  }
+
+  .meta-tag svg {
+    flex-shrink: 0;
+  }
+
+  .meta-tag--fabric {
+    background-color: rgba(74, 20, 140, 0.1);
+    color: var(--color-primary-purple);
+  }
+
+  .meta-tag--color {
+    background-color: rgba(255, 215, 0, 0.15);
+    color: var(--color-primary-royal-blue);
+  }
+
+  /* Price */
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .price {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary-purple);
+  }
+
+  .availability {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .availability--available {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+  }
+
+  .availability--unavailable {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+  }
+
+  /* Description */
+  .product-description {
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+
+  .product-description :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  /* CTA */
+  .product-cta {
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1.25rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .btn--instagram {
+    background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn--instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(131, 58, 180, 0.4);
+  }
+
+  .btn-icon {
+    flex-shrink: 0;
+  }
+
+  /* Info Box */
+  .product-info-box {
+    background-color: var(--color-bg-cream);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .info-box__title {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .info-box__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-box__list li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+    position: relative;
+  }
+
+  .info-box__list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary-purple);
+    font-weight: 700;
+  }
+
+  .info-box__list li:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<script>
+  // Instagram button functionality will be added in Phase 5
+  document.getElementById('inquire-btn')?.addEventListener('click', () => {
+    window.showToast({
+      type: 'info',
+      title: 'Instagram Integration',
+      message: 'Instagram button functionality will be added in the next phase!'
+    });
+  });
+</script>
