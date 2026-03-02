@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Toast from '../components/Toast.astro';
+
+const pageTitle = 'About MohMaya | Threads of Elegance';
+const pageDescription = 'Discover the story behind MohMaya - where tradition meets contemporary elegance. Handcrafted sarees that celebrate India\'s rich textile heritage.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero__content" data-aos="fade-up">
+          <h1 class="about-hero__title">Threads of Elegance</h1>
+          <p class="about-hero__subtitle">
+            Where tradition intertwines with contemporary grace, creating timeless masterpieces.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content" data-aos="fade-right">
+            <h2 class="section-title">Our Story</h2>
+            <div class="prose">
+              <p>
+                <strong>MohMaya</strong> was born from a profound love for India's rich textile heritage
+                and a vision to preserve the artistry of handwoven sarees in the modern world.
+              </p>
+              <p>
+                The name "MohMaya" embodies enchantment and illusion—the magical transformation
+                that occurs when a woman drapes herself in six yards of pure artistry. Each saree
+                we curate tells a story of skilled artisans, traditional looms, and centuries-old
+                weaving techniques passed down through generations.
+              </p>
+              <p>
+                We believe that wearing a handcrafted saree is not just a fashion choice; it's
+                a celebration of culture, an embrace of tradition, and a statement of timeless elegance.
+              </p>
+            </div>
+          </div>
+          <div class="about-image" data-aos="fade-left">
+            <div class="image-wrapper">
+              <div class="decorative-pattern"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">What We Stand For</h2>
+        <div class="values-grid">
+          <div class="value-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="value-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3 class="value-title">Authentic Craftsmanship</h3>
+            <p class="value-description">
+              Every saree is handpicked from master weavers across India, ensuring authentic
+              traditional techniques and superior quality.
+            </p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="value-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <h3 class="value-title">Premium Quality</h3>
+            <p class="value-description">
+              We curate only the finest fabrics—pure silk, handloom cotton, and intricate
+              brocades—each piece a testament to excellence.
+            </p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="value-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            </div>
+            <h3 class="value-title">Personalized Service</h3>
+            <p class="value-description">
+              We provide one-on-one consultation through Instagram to help you find the
+              perfect saree for your special occasion.
+            </p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="value-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="value-title">Trust & Transparency</h3>
+            <p class="value-description">
+              Every piece comes with complete transparency about fabric, origin, and care
+              instructions. Your trust is our foundation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-section">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-image" data-aos="fade-right">
+            <div class="stats-card">
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Handcrafted</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Regions Represented</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Unique Designs</span>
+              </div>
+            </div>
+          </div>
+          <div class="why-content" data-aos="fade-left">
+            <h2 class="section-title">Why Choose MohMaya?</h2>
+            <div class="prose">
+              <p>
+                In a world of fast fashion, we champion slow, deliberate artistry. Each MohMaya
+                saree is more than fabric—it's a piece of living heritage, a conversation between
+                past and present.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <strong>Curated Collection:</strong> Carefully selected from India's finest weaving
+                  clusters including Varanasi, Kanchipuram, and Chanderi.
+                </li>
+                <li>
+                  <strong>Artisan Support:</strong> Your purchase directly supports traditional weavers
+                  and preserves ancient craft traditions.
+                </li>
+                <li>
+                  <strong>Unique Pieces:</strong> Many of our sarees are one-of-a-kind or limited
+                  edition, ensuring your elegance is truly distinctive.
+                </li>
+                <li>
+                  <strong>Easy Discovery:</strong> Browse our collection online, inquire instantly
+                  on Instagram, and receive personalized recommendations.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card" data-aos="zoom-in">
+          <h2 class="cta-title">Ready to Discover Your Perfect Saree?</h2>
+          <p class="cta-description">
+            Explore our curated collection of handcrafted masterpieces and find the saree
+            that speaks to your soul.
+          </p>
+          <div class="cta-buttons">
+            <a href="/#products" class="btn btn--primary">
+              Explore Collection
+            </a>
+            <a
+              href="https://www.instagram.com/mohmayalabel"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn--outline"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+              </svg>
+              Follow on Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <Toast />
+</BaseLayout>
+
+<style>
+  /* About Hero */
+  .about-hero {
+    padding: 8rem 0 4rem;
+    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.03) 10px,
+        rgba(255, 255, 255, 0.03) 20px
+      );
+    animation: patternMove 20s linear infinite;
+  }
+
+  @keyframes patternMove {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(20px) translateY(20px); }
+  }
+
+  .about-hero__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-hero__title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+  }
+
+  .about-hero__subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .about-hero {
+      padding: 6rem 0 3rem;
+    }
+
+    .about-hero__title {
+      font-size: 2.5rem;
+    }
+
+    .about-hero__subtitle {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Sections */
+  .about-section,
+  .values-section,
+  .why-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 2rem;
+    text-align: center;
+  }
+
+  /* About Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .about-content .section-title {
+    text-align: left;
+  }
+
+  .prose p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .prose p strong {
+    color: var(--color-primary-purple);
+    font-weight: 600;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(74, 20, 140, 0.1) 0%, rgba(26, 35, 126, 0.1) 100%);
+    overflow: hidden;
+  }
+
+  .decorative-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, var(--color-gold) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, var(--color-primary-purple) 2px, transparent 2px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+    animation: patternFloat 15s ease-in-out infinite;
+  }
+
+  @keyframes patternFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+  }
+
+  /* Values Grid */
+  .values-section {
+    background-color: var(--color-bg-light);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .value-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    text-align: center;
+  }
+
+  .value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .value-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    color: white;
+    border-radius: 50%;
+  }
+
+  .value-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .value-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Why Section */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .why-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .why-content .section-title {
+    text-align: left;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+  }
+
+  .feature-list li {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-size: 1.063rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary-purple);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  .feature-list li strong {
+    color: var(--color-text-primary);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Stats Card */
+  .stats-card {
+    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    padding: 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    color: white;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  .stat-number {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, white 0%, var(--color-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 1.125rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, rgba(74, 20, 140, 0.05) 0%, rgba(26, 35, 126, 0.05) 100%);
+  }
+
+  .cta-card {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .cta-description {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 2.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-size: 1.063rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    cursor: pointer;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(74, 20, 140, 0.3);
+  }
+
+  .btn--outline {
+    background-color: transparent;
+    border: 2px solid var(--color-primary-purple);
+    color: var(--color-primary-purple);
+  }
+
+  .btn--outline:hover {
+    background-color: var(--color-primary-purple);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 640px) {
+    .cta-title {
+      font-size: 2rem;
+    }
+
+    .cta-description {
+      font-size: 1.125rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
