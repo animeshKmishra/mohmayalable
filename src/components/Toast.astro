@@ -1,0 +1,276 @@
+---
+// Toast notification component for user feedback
+---
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<style>
+  /* Toast Container */
+  .toast-container {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .toast-container {
+      top: 5rem;
+      right: 1rem;
+      left: 1rem;
+      max-width: none;
+    }
+  }
+
+  /* Toast */
+  :global(.toast) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    pointer-events: auto;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  :global(.toast.show) {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  :global(.toast.hide) {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+
+  /* Toast Icon */
+  :global(.toast__icon) {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Success Icon */
+  :global(.toast--success .toast__icon) {
+    color: #10B981;
+  }
+
+  /* Error Icon */
+  :global(.toast--error .toast__icon) {
+    color: #EF4444;
+  }
+
+  /* Info Icon */
+  :global(.toast--info .toast__icon) {
+    color: var(--color-primary-purple);
+  }
+
+  /* Toast Content */
+  :global(.toast__content) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  :global(.toast__title) {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  :global(.toast__message) {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Toast Close Button */
+  :global(.toast__close) {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.toast__close:hover) {
+    color: var(--color-text-primary);
+  }
+
+  :global(.toast__close svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Progress Bar */
+  :global(.toast__progress) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--color-gold);
+    border-bottom-left-radius: var(--radius-lg);
+    transition: width linear;
+  }
+
+  :global(.toast--success .toast__progress) {
+    background-color: #10B981;
+  }
+
+  :global(.toast--error .toast__progress) {
+    background-color: #EF4444;
+  }
+
+  :global(.toast--info .toast__progress) {
+    background-color: var(--color-primary-purple);
+  }
+
+  /* Animations */
+  @keyframes :global(slideIn) {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes :global(slideOut) {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // Toast notification system
+  interface ToastOptions {
+    title?: string;
+    message: string;
+    type?: 'success' | 'error' | 'info';
+    duration?: number;
+  }
+
+  function showToast(options: ToastOptions): void {
+    const {
+      title,
+      message,
+      type = 'info',
+      duration = 4000
+    } = options;
+
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+    toast.setAttribute('role', 'alert');
+
+    // Icon SVGs
+    const icons = {
+      success: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
+      error: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`,
+      info: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`
+    };
+
+    // Build toast HTML
+    toast.innerHTML = `
+      ${icons[type]}
+      <div class="toast__content">
+        ${title ? `<div class="toast__title">${title}</div>` : ''}
+        <div class="toast__message">${message}</div>
+      </div>
+      <button class="toast__close" aria-label="Close notification">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="toast__progress"></div>
+    `;
+
+    // Add to container
+    container.appendChild(toast);
+
+    // Show toast with animation
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+    });
+
+    // Progress bar animation
+    const progressBar = toast.querySelector('.toast__progress') as HTMLElement;
+    if (progressBar) {
+      progressBar.style.width = '100%';
+      progressBar.style.transitionDuration = `${duration}ms`;
+      requestAnimationFrame(() => {
+        progressBar.style.width = '0%';
+      });
+    }
+
+    // Close button
+    const closeBtn = toast.querySelector('.toast__close');
+    closeBtn?.addEventListener('click', () => removeToast(toast));
+
+    // Auto-remove after duration
+    const timeoutId = setTimeout(() => {
+      removeToast(toast);
+    }, duration);
+
+    // Store timeout ID for cleanup
+    (toast as any)._timeoutId = timeoutId;
+  }
+
+  function removeToast(toast: HTMLElement): void {
+    // Clear timeout
+    if ((toast as any)._timeoutId) {
+      clearTimeout((toast as any)._timeoutId);
+    }
+
+    // Animate out
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+
+    // Remove from DOM after animation
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }
+
+  // Make showToast available globally
+  (window as any).showToast = showToast;
+
+  // Export TypeScript type
+  declare global {
+    interface Window {
+      showToast: (options: ToastOptions) => void;
+    }
+  }
+</script>

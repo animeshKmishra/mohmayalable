@@ -1,0 +1,324 @@
+---
+// Header component with navigation and logo
+---
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="/" class="nav__logo" aria-label="MohMaya Home">
+      <img src="/images/logo.png" alt="MohMaya Logo" class="logo-img" />
+      <span class="logo-text">MohMaya</span>
+    </a>
+
+    <!-- Mobile menu button -->
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+
+    <!-- Navigation menu -->
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="/" class="nav__link">Home</a>
+        </li>
+        <li class="nav__item">
+          <a href="#products" class="nav__link">Collection</a>
+        </li>
+        <li class="nav__item">
+          <a href="/about" class="nav__link">About</a>
+        </li>
+        <li class="nav__item">
+          <a href="https://www.instagram.com/mohmayalabel" target="_blank" rel="noopener noreferrer" class="nav__link nav__link--instagram" aria-label="Visit us on Instagram">
+            <svg class="instagram-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Header Styles */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-bg-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    transition: box-shadow var(--transition-base);
+  }
+
+  .header.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.5rem;
+  }
+
+  /* Logo */
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: transform var(--transition-base);
+  }
+
+  .nav__logo:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-img {
+    height: 50px;
+    width: auto;
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary-purple);
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .logo-text {
+      display: block;
+    }
+  }
+
+  /* Navigation Menu */
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-gold);
+    transition: width var(--transition-base);
+  }
+
+  .nav__link:hover {
+    color: var(--color-primary-purple);
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  .nav__link--instagram {
+    color: var(--color-primary-purple);
+  }
+
+  .instagram-icon {
+    transition: transform var(--transition-base);
+  }
+
+  .nav__link--instagram:hover .instagram-icon {
+    transform: scale(1.2);
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Mobile Menu Toggle */
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger {
+    position: relative;
+    width: 1.5rem;
+    height: 2px;
+    background-color: var(--color-primary-purple);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 1.5rem;
+    height: 2px;
+    background-color: var(--color-primary-purple);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger::before {
+    top: -6px;
+  }
+
+  .hamburger::after {
+    bottom: -6px;
+  }
+
+  /* Mobile menu active state */
+  .nav__toggle[aria-expanded="true"] .hamburger {
+    background-color: transparent;
+  }
+
+  .nav__toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .nav__toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .nav__toggle {
+      display: flex;
+    }
+
+    .nav__menu {
+      position: fixed;
+      top: 4.5rem;
+      left: 0;
+      width: 100%;
+      background-color: var(--color-bg-white);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
+      max-height: calc(100vh - 4.5rem);
+      overflow-y: auto;
+    }
+
+    .nav__menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      gap: 0;
+      padding: 1.5rem 0;
+    }
+
+    .nav__item {
+      width: 100%;
+    }
+
+    .nav__link {
+      display: block;
+      padding: 1rem 2rem;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav__link::after {
+      display: none;
+    }
+
+    .nav__link:hover {
+      background-color: var(--color-bg-cream);
+    }
+  }
+
+  /* Tablet and above */
+  @media (min-width: 769px) {
+    .nav__menu {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    const navLinks = navMenu.querySelectorAll('.nav__link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target as Node) && !navMenu.contains(e.target as Node)) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+      }
+    });
+  }
+
+  // Add shadow on scroll
+  const header = document.getElementById('header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+</script>

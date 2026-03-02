@@ -1,22 +1,153 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Footer from '../components/Footer.astro';
+import Toast from '../components/Toast.astro';
 ---
 
 <BaseLayout>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header -->
+  <Header />
+
+  <!-- Main Content -->
   <main id="main-content">
-    <div class="container section">
-      <div style="text-align: center; padding: 4rem 0;">
-        <img src="/images/logo.png" alt="MohMaya Logo" style="max-width: 200px; margin: 0 auto 2rem;" />
-        <h1 style="color: var(--color-primary-purple); margin-bottom: 1rem;">
-          MohMaya
-        </h1>
-        <h2 style="font-family: var(--font-body); font-weight: 300; color: var(--color-gold); margin-bottom: 2rem;">
-          Threads of Elegance
+    <!-- Hero Section -->
+    <Hero />
+
+    <!-- Products Section (Coming Soon) -->
+    <section id="products" class="products-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          Our Collection
         </h2>
-        <p style="max-width: 600px; margin: 0 auto; font-size: 1.25rem;">
-          Coming soon... An exquisite collection of custom-designed sarees, handcrafted with tradition and elegance.
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Exquisite sarees are coming soon. Each piece will be showcased with love and attention to detail.
         </p>
+        <div class="coming-soon" data-aos="zoom-in" data-aos-delay="400">
+          <div class="coming-soon__icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3 class="coming-soon__title">Coming Soon</h3>
+          <p class="coming-soon__text">
+            We're curating an exquisite collection of sarees for you. Follow us on Instagram for updates!
+          </p>
+          <a href="https://www.instagram.com/mohmayalabel" target="_blank" rel="noopener noreferrer" class="btn btn--outline">
+            Follow on Instagram
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
+
+  <!-- Footer -->
+  <Footer />
+
+  <!-- Toast Notifications -->
+  <Toast />
 </BaseLayout>
+
+<style>
+  /* Products Section */
+  .products-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-bg-white);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: -2rem auto 4rem;
+  }
+
+  /* Coming Soon Card */
+  .coming-soon {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: var(--color-bg-cream);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .coming-soon__icon {
+    margin: 0 auto 1.5rem;
+    width: 64px;
+    height: 64px;
+    color: var(--color-primary-purple);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+  }
+
+  .coming-soon__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-primary-purple);
+    margin: 0 0 1rem;
+  }
+
+  .coming-soon__text {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  .btn--outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--color-primary-purple);
+    color: var(--color-primary-purple);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    background-color: transparent;
+  }
+
+  .btn--outline:hover {
+    background-color: var(--color-primary-purple);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .products-section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .coming-soon {
+      padding: 2rem 1.5rem;
+    }
+
+    .coming-soon__title {
+      font-size: 1.75rem;
+    }
+  }
+</style>
+
