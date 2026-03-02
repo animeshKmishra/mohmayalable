@@ -208,10 +208,41 @@ button {
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 3.5rem;
+  font-weight: 800;
   text-align: center;
   margin-bottom: var(--spacing-lg);
-  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 50%, var(--color-primary-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 10px rgba(74, 20, 140, 0.2);
+  padding-bottom: 1.5rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+  border-radius: 2px;
+}
+
+.section-title::before {
+  content: '✦';
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  color: #FFD700;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 /* Responsive Typography */
