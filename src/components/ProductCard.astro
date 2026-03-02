@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import InstagramButton from './InstagramButton.astro';
 
 interface Props {
   product: CollectionEntry<'products'>;
@@ -75,6 +76,18 @@ const aosDelay = (index % 3) * 100;
       <!-- Price -->
       <div class="product-card__price">
         <span class="price">{formattedPrice}</span>
+      </div>
+
+      <!-- Instagram Button -->
+      <div class="product-card__cta">
+        <InstagramButton
+          productId={data.productId}
+          productName={data.title}
+          productPrice={formattedPrice}
+          variant="outline"
+          size="small"
+          fullWidth={true}
+        />
       </div>
     </div>
   </a>
@@ -262,6 +275,20 @@ const aosDelay = (index % 3) * 100;
     color: var(--color-primary-purple);
   }
 
+  /* CTA */
+  .product-card__cta {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Prevent button click from triggering link */
+  .product-card__cta :global(.instagram-btn) {
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+  }
+
   /* Responsive */
   @media (max-width: 640px) {
     .product-card__content {
@@ -275,5 +302,24 @@ const aosDelay = (index % 3) * 100;
     .price {
       font-size: 1.25rem;
     }
+
+    .product-card__cta {
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
   }
 </style>
+
+<script>
+  // Prevent Instagram button click from triggering card link
+  document.addEventListener('DOMContentLoaded', () => {
+    const instagramButtons = document.querySelectorAll('.product-card__cta .instagram-btn');
+
+    instagramButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    });
+  });
+</script>
