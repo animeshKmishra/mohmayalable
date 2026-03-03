@@ -15,9 +15,9 @@
   --color-primary-sand: #E8DCC7;
 
   /* Browns - Text & Accents */
-  --color-brown-dark: #3E2723;
-  --color-brown-medium: #5D4037;
-  --color-brown-light: #8D6E63;
+  --color-brown-dark: #2C1810;
+  --color-brown-medium: #4A2F1F;
+  --color-brown-light: #6B4E3D;
 
   /* Gold - Luxury Accents */
   --color-gold: #B8860B;
@@ -30,9 +30,9 @@
   --color-bg-light: #FAFAF8;
 
   /* Text Colors */
-  --color-text-primary: #3E2723;
-  --color-text-secondary: #5D4037;
-  --color-text-muted: #8D6E63;
+  --color-text-primary: #2C1810;
+  --color-text-secondary: #4A2F1F;
+  --color-text-muted: #6B4E3D;
 
   /* UI Colors */
   --color-border: #E8DCC7;
