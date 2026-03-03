@@ -32,7 +32,7 @@ const pageTitle = data.seoTitle || `${data.title} | MohMaya`;
 const pageDescription = data.seoDescription || data.description.substring(0, 160);
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={data.image.src}>
+<BaseLayout title={pageTitle} description={pageDescription} image={data.image}>
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <Header />
 
