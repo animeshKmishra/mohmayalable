@@ -3,7 +3,7 @@ productId: "MML-003"
 title: "Ruby Red Georgette Saree"
 price: 12999
 description: "A stunning ruby red georgette saree with delicate embroidery and contemporary design perfect for modern occasions."
-image: "../../../public/images/logo.png"
+image: "/images/sarees/DSC_3989.jpeg"
 fabric: "Georgette"
 color: "Ruby Red"
 featured: false

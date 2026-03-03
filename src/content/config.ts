@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 // Product collection schema
 const productsCollection = defineCollection({
   type: 'content',
-  schema: ({ image }) => z.object({
+  schema: z.object({
     // Required fields
     productId: z.string().regex(/^MML-\d{3}$/, {
       message: 'Product ID must be in format MML-XXX (e.g., MML-001)'
@@ -11,10 +11,10 @@ const productsCollection = defineCollection({
     title: z.string().min(1, 'Title is required'),
     price: z.number().positive('Price must be a positive number'),
     description: z.string().min(10, 'Description must be at least 10 characters'),
-    image: image(),
+    image: z.string(),
 
     // Optional fields
-    gallery: z.array(image()).optional().default([]),
+    gallery: z.array(z.string()).optional().default([]),
     fabric: z.enum([
       'Silk',
       'Cotton',

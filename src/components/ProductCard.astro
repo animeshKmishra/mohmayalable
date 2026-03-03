@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import InstagramButton from './InstagramButton.astro';
 
@@ -30,13 +29,13 @@ const aosDelay = (index % 3) * 100;
   <a href={`/product/${slug}`} class="product-card__link">
     <!-- Image Container -->
     <div class="product-card__image-wrapper">
-      <Image
+      <img
         src={data.image}
         alt={data.title}
         class="product-card__image"
         loading="lazy"
-        width={600}
-        height={800}
+        width="600"
+        height="800"
       />
 
       <!-- Badges -->
