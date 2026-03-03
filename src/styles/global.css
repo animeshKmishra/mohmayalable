@@ -90,6 +90,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Ensure AOS elements are always visible even if AOS fails to load */
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);

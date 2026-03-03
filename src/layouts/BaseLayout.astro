@@ -10,7 +10,7 @@ interface Props {
 const {
   title = 'MohMaya - Threads of Elegance | Premium Custom Sarees',
   description = 'Discover exquisite custom-designed sarees at MohMaya. Each piece is handcrafted with elegance and tradition. Explore our collection of silk, banarasi, kanjeevaram, and designer sarees.',
-  image = '/images/logo.png'
+  image = '/images/lable.png'
 } = Astro.props;
 
 const site = Astro.site || new URL('https://mohmaya-elegance.netlify.app');
@@ -75,16 +75,22 @@ const canonicalURL = new URL(Astro.url.pathname, site);
     <!-- AOS Animations JS -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script is:inline>
-      // Initialize AOS
-      if (typeof AOS !== 'undefined') {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-out',
-          once: true,
-          offset: 100,
-          disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        });
-      }
+      // Initialize AOS with error handling
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          if (typeof AOS !== 'undefined') {
+            AOS.init({
+              duration: 800,
+              easing: 'ease-out',
+              once: true,
+              offset: 100,
+              disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            });
+          }
+        } catch (error) {
+          console.log('AOS initialization skipped');
+        }
+      });
     </script>
 
     <!-- Netlify Identity Redirect Handler -->
