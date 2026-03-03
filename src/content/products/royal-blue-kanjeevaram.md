@@ -3,7 +3,7 @@ productId: "MML-001"
 title: "Royal Blue Kanjeevaram Silk Saree"
 price: 18999
 description: "An exquisite royal blue Kanjeevaram silk saree featuring intricate gold zari work and traditional temple border."
-image: "/images/sarees/DSC_3989.jpeg"
+image: "/images/sarees/royal-blue-kanjeevaram.png"
 fabric: "Kanjeevaram"
 color: "Royal Blue"
 featured: true

@@ -3,7 +3,7 @@ productId: "MML-002"
 title: "Emerald Green Banarasi Silk Saree"
 price: 16499
 description: "A gorgeous emerald green Banarasi silk saree with opulent floral motifs and classic brocade work."
-image: "/images/sarees/DSC_3989.jpeg"
+image: "/images/sarees/emerals-banarasi.jpeg"
 fabric: "Banarasi"
 color: "Emerald Green"
 featured: true

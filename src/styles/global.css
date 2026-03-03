@@ -4,39 +4,44 @@
 
 /* ===================================
    MohMaya - Threads of Elegance
-   Custom Styles & Variables
+   Cream & Gold Aesthetic
    =================================== */
 
-/* Color Palette - Elegant Saree Theme */
+/* Color Palette - Warm Elegance */
 :root {
-  /* Primary Colors - Jewel Tones */
-  --color-primary-purple: #4A148C;
-  --color-primary-emerald: #1B5E20;
-  --color-primary-royal-blue: #1A237E;
+  /* Primary Colors - Warm Earth Tones */
+  --color-primary-cream: #FFF8F0;
+  --color-primary-beige: #F5EFE7;
+  --color-primary-sand: #E8DCC7;
 
-  /* Secondary Colors - Luxury Accents */
-  --color-gold: #FFD700;
-  --color-gold-light: #FFF4CC;
-  --color-rose-gold: #B76E79;
+  /* Browns - Text & Accents */
+  --color-brown-dark: #3E2723;
+  --color-brown-medium: #5D4037;
+  --color-brown-light: #8D6E63;
+
+  /* Gold - Luxury Accents */
+  --color-gold: #B8860B;
+  --color-gold-light: #D4AF37;
+  --color-gold-pale: #F5E6C8;
 
   /* Background Colors */
-  --color-bg-cream: #FFF8E7;
+  --color-bg-cream: #FFF8F0;
   --color-bg-white: #FFFFFF;
-  --color-bg-light: #FAFAFA;
+  --color-bg-light: #FAFAF8;
 
   /* Text Colors */
-  --color-text-primary: #2C2C2C;
-  --color-text-secondary: #5A5A5A;
-  --color-text-muted: #8A8A8A;
+  --color-text-primary: #3E2723;
+  --color-text-secondary: #5D4037;
+  --color-text-muted: #8D6E63;
 
   /* UI Colors */
-  --color-border: #E0E0E0;
-  --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-border: #E8DCC7;
+  --color-shadow: rgba(62, 39, 35, 0.1);
+  --color-overlay: rgba(62, 39, 35, 0.5);
 
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Spacing Scale */
   --spacing-xs: 0.5rem;
@@ -48,18 +53,18 @@
   /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
-  --radius-lg: 1rem;
+  --radius-lg: 0.75rem;
 
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 500ms ease;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  /* Shadows - Subtle */
+  --shadow-sm: 0 1px 3px rgba(62, 39, 35, 0.08);
+  --shadow-md: 0 4px 12px rgba(62, 39, 35, 0.12);
+  --shadow-lg: 0 10px 24px rgba(62, 39, 35, 0.15);
+  --shadow-xl: 0 20px 40px rgba(62, 39, 35, 0.18);
 }
 
 /* Reset & Base Styles */
@@ -81,7 +86,7 @@ body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background-color: var(--color-bg-cream);
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
@@ -89,42 +94,43 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.2;
-  color: var(--color-text-primary);
+  line-height: 1.3;
+  color: var(--color-brown-dark);
 }
 
 h1 {
-  font-size: 3rem; /* 48px */
+  font-size: 3rem;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 2.25rem; /* 36px */
+  font-size: 2.25rem;
 }
 
 h3 {
-  font-size: 1.875rem; /* 30px */
+  font-size: 1.875rem;
 }
 
 h4 {
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.5rem;
 }
 
 p {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.063rem;
   color: var(--color-text-secondary);
   margin-bottom: 1rem;
+  line-height: 1.8;
 }
 
 /* Links */
 a {
-  color: var(--color-primary-purple);
+  color: var(--color-gold);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-royal-blue);
+  color: var(--color-brown-medium);
 }
 
 /* Focus Styles - Accessibility */
@@ -132,8 +138,8 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--color-gold);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
 }
 
 /* Images */
@@ -151,13 +157,6 @@ button {
   background: none;
 }
 
-/* Smooth Transitions */
-* {
-  transition-property: color, background-color, border-color, transform, box-shadow, opacity;
-  transition-duration: var(--transition-base);
-  transition-timing-function: ease;
-}
-
 /* Remove transitions for reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -172,8 +171,8 @@ button {
 
 /* Selection Colors */
 ::selection {
-  background-color: var(--color-gold-light);
-  color: var(--color-text-primary);
+  background-color: var(--color-gold-pale);
+  color: var(--color-brown-dark);
 }
 
 /* Scrollbar Styling (Webkit browsers) */
@@ -182,7 +181,7 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-light);
+  background: var(--color-primary-beige);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -191,7 +190,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-rose-gold);
+  background: var(--color-gold-light);
 }
 
 /* Utility Classes */
@@ -208,17 +207,13 @@ button {
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 2.75rem;
+  font-weight: 600;
   text-align: center;
   margin-bottom: var(--spacing-lg);
-  background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 50%, var(--color-primary-purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-brown-dark);
   position: relative;
-  letter-spacing: 1px;
-  text-shadow: 0 4px 10px rgba(74, 20, 140, 0.2);
+  letter-spacing: 0.5px;
   padding-bottom: 1.5rem;
 }
 
@@ -228,43 +223,35 @@ button {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #FFD700, transparent);
-  border-radius: 2px;
-}
-
-.section-title::before {
-  content: '✦';
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  transform: translateX(-50%);
-  color: #FFD700;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  width: 80px;
+  height: 2px;
+  background: var(--color-gold);
 }
 
 /* Responsive Typography */
 @media (max-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   h1 {
-    font-size: 2.25rem; /* 36px */
+    font-size: 2.25rem;
   }
 
   h2 {
-    font-size: 1.875rem; /* 30px */
+    font-size: 1.875rem;
   }
 
   h3 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem;
   }
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
   }
 }
 
@@ -280,7 +267,7 @@ button {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--color-primary-purple);
+  background: var(--color-brown-dark);
   color: white;
   padding: 8px 16px;
   text-decoration: none;
