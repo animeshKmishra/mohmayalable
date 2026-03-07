@@ -11,18 +11,22 @@
     <div class="hero__content">
       <!-- Logo -->
       <div class="hero__logo" data-aos="fade-up" data-aos-duration="1000">
-        <img
-          src="/images/lable.png"
-          alt="MohMaya Logo"
-          class="hero__logo-img"
-          width="280"
-          height="280"
-        />
+        <span class="hero__logo-frame" aria-hidden="true">
+          <img
+            src="/images/lable.png"
+            alt="MohMaya Logo"
+            class="hero__logo-img"
+            width="280"
+            height="280"
+            loading="eager"
+            decoding="async"
+          />
+        </span>
       </div>
 
       <!-- Brand Title -->
       <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-        MohMaya
+        MohMaya Lable
       </h1>
 
       <!-- Tagline -->
@@ -107,21 +111,53 @@
   /* Logo */
   .hero__logo {
     margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
   }
 
-  .hero__logo-img {
-    width: 220px;
-    height: auto;
-    margin: 0 auto;
-    filter: drop-shadow(0 8px 24px rgba(62, 39, 35, 0.2));
+  /* Logo Frame - circular background with padding */
+  .hero__logo-frame {
+    display: inline-block;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 8px 24px rgba(62, 39, 35, 0.2));
+    padding: 2.7rem;
+    transition: transform var(--transition-base);
   }
 
-  @media (min-width: 768px) {
+  .hero__logo-frame:hover {
+    transform: scale(1.05);
+  }
+
+  /* Logo Image - clean and scalable, fills 70% of circle */
+  .hero__logo-img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  /* Responsive sizing - maintains 70% fill ratio */
+  @media (min-width: 640px) {
+    .hero__logo-img {
+      width: 240px;
+      height: 240px;
+    }
+
+    .hero__logo-frame {
+      padding: 3.2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
     .hero__logo-img {
       width: 280px;
+      height: 280px;
+    }
+
+    .hero__logo-frame {
+      padding: 3.8rem;
     }
   }
 

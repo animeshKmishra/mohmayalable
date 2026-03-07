@@ -59,6 +59,7 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
             <!-- Main Image -->
             <div class="main-image">
               <img
+                id="main-image"
                 src={data.image}
                 alt={data.title}
                 width={800}
@@ -72,22 +73,28 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
               )}
             </div>
 
-            <!-- Gallery Thumbnails (if available) -->
-            {data.gallery && data.gallery.length > 0 && (
-              <div class="gallery-thumbnails">
-                {data.gallery.map((img, index) => (
-                  <div class="thumbnail">
-                    <img
-                      src={img}
-                      alt={`${data.title} - View ${index + 2}`}
-                      width={150}
-                      height={200}
-                      class="thumbnail__img"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <!-- Gallery Thumbnails - ALL images (main + gallery) -->
+            {(() => {
+              const allImages = [data.image, ...(data.gallery || [])];
+              return allImages.length > 1 && (
+                <div class="gallery-thumbnails">
+                  {allImages.map((img, index) => (
+                    <div
+                      class={`thumbnail ${index === 0 ? 'thumbnail--active' : ''}`}
+                      data-image={img}
+                    >
+                      <img
+                        src={img}
+                        alt={`${data.title} - View ${index + 1}`}
+                        width={150}
+                        height={200}
+                        class="thumbnail__img"
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
 
           <!-- Product Info -->
@@ -196,11 +203,12 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
   }
 
   .breadcrumb a {
-    color: var(--color-primary-purple);
+    color: var(--color-gold);
     text-decoration: none;
   }
 
   .breadcrumb a:hover {
+    color: var(--color-gold-light);
     text-decoration: underline;
   }
 
@@ -239,6 +247,7 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
     width: 100%;
     height: auto;
     display: block;
+    transition: opacity 0.3s ease;
   }
 
   .sold-out-overlay {
@@ -273,11 +282,20 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
     border-radius: var(--radius-md);
     overflow: hidden;
     cursor: pointer;
-    transition: transform var(--transition-base);
+    transition: all var(--transition-base);
+    border: 3px solid transparent;
+    opacity: 0.7;
   }
 
   .thumbnail:hover {
     transform: scale(1.05);
+    opacity: 1;
+  }
+
+  .thumbnail--active {
+    border-color: var(--color-gold);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
   }
 
   .thumbnail__img {
@@ -336,13 +354,13 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
   }
 
   .meta-tag--fabric {
-    background-color: rgba(74, 20, 140, 0.1);
-    color: var(--color-primary-purple);
+    background-color: rgba(184, 134, 11, 0.1);
+    color: var(--color-gold);
   }
 
   .meta-tag--color {
-    background-color: rgba(255, 215, 0, 0.15);
-    color: var(--color-primary-royal-blue);
+    background-color: rgba(184, 134, 11, 0.15);
+    color: var(--color-brown-dark);
   }
 
   /* Price */
@@ -359,7 +377,7 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--color-primary-purple);
+    color: var(--color-brown-dark);
   }
 
   .availability {
@@ -430,7 +448,7 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
     content: '✓';
     position: absolute;
     left: 0;
-    color: var(--color-primary-purple);
+    color: var(--color-gold);
     font-weight: 700;
   }
 
@@ -438,3 +456,36 @@ const pageDescription = data.seoDescription || data.description.substring(0, 160
     margin-bottom: 0;
   }
 </style>
+
+<script>
+  // Gallery Image Switcher
+  document.addEventListener('DOMContentLoaded', () => {
+    const mainImage = document.getElementById('main-image') as HTMLImageElement;
+    const thumbnails = document.querySelectorAll('.thumbnail');
+
+    if (mainImage && thumbnails.length > 0) {
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener('click', () => {
+          // Remove active class from all thumbnails
+          thumbnails.forEach(t => t.classList.remove('thumbnail--active'));
+
+          // Add active class to clicked thumbnail
+          thumbnail.classList.add('thumbnail--active');
+
+          // Get the image URL from data attribute
+          const imageUrl = thumbnail.getAttribute('data-image');
+
+          if (imageUrl && mainImage) {
+            // Update main image with smooth transition
+            mainImage.style.opacity = '0';
+
+            setTimeout(() => {
+              mainImage.src = imageUrl;
+              mainImage.style.opacity = '1';
+            }, 200);
+          }
+        });
+      });
+    }
+  });
+</script>

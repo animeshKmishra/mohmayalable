@@ -62,8 +62,8 @@ const canonicalURL = new URL(Astro.url.pathname, site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-    <!-- AOS Animations CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <!-- AOS Animations CSS - Local -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css" />
 
     <!-- Netlify Identity Widget for CMS Authentication -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -72,23 +72,20 @@ const canonicalURL = new URL(Astro.url.pathname, site);
   <body>
     <slot />
 
-    <!-- AOS Animations JS -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- AOS Animations JS - Local -->
+    <script is:inline src="/vendor/aos/aos.js"></script>
     <script is:inline>
-      // Initialize AOS with error handling
+      // Initialize AOS - Simple and reliable with local file
       document.addEventListener('DOMContentLoaded', function() {
-        try {
-          if (typeof AOS !== 'undefined') {
-            AOS.init({
-              duration: 800,
-              easing: 'ease-out',
-              once: true,
-              offset: 100,
-              disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-            });
-          }
-        } catch (error) {
-          console.log('AOS initialization skipped');
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            offset: 100,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          });
+          console.log('✓ AOS animations loaded from local files');
         }
       });
     </script>

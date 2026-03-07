@@ -8,7 +8,7 @@ fabric: "Georgette"
 color: "Ruby Red"
 featured: false
 available: true
-order: 3
+order: 4
 ---
 
 This captivating ruby red georgette saree combines traditional elegance with contemporary flair. Designed for the modern woman who appreciates:

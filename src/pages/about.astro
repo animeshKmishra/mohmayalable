@@ -211,7 +211,7 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
   /* About Hero */
   .about-hero {
     padding: 8rem 0 4rem;
-    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
     color: white;
     text-align: center;
     position: relative;
@@ -318,7 +318,7 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
   }
 
   .prose p strong {
-    color: var(--color-primary-purple);
+    color: var(--color-gold);
     font-weight: 600;
   }
 
@@ -330,18 +330,16 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
     position: relative;
     aspect-ratio: 4 / 5;
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(74, 20, 140, 0.1) 0%, rgba(26, 35, 126, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
     overflow: hidden;
   }
 
   .decorative-pattern {
     position: absolute;
     inset: 0;
-    background-image:
-      radial-gradient(circle at 25% 25%, var(--color-gold) 2px, transparent 2px),
-      radial-gradient(circle at 75% 75%, var(--color-primary-purple) 2px, transparent 2px);
-    background-size: 50px 50px;
-    opacity: 0.3;
+    background-image: url('/images/saree_model_3.jpg');
+    background-size: cover;
+    background-position: center;
     animation: patternFloat 15s ease-in-out infinite;
   }
 
@@ -383,7 +381,7 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
     color: white;
     border-radius: 50%;
   }
@@ -440,7 +438,7 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
     content: '✓';
     position: absolute;
     left: 0;
-    color: var(--color-primary-purple);
+    color: var(--color-gold);
     font-weight: 700;
     font-size: 1.25rem;
   }
@@ -453,11 +451,11 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
 
   /* Stats Card */
   .stats-card {
-    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
     padding: 3rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
-    color: white;
+    color: var(--color-brown-dark);
   }
 
   .stat-item {
@@ -465,7 +463,7 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
     flex-direction: column;
     align-items: center;
     padding: 2rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(44, 24, 16, 0.2);
   }
 
   .stat-item:last-child {
@@ -478,22 +476,20 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
     font-weight: 700;
     line-height: 1;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, white 0%, var(--color-gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-brown-dark);
   }
 
   .stat-label {
     font-size: 1.125rem;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--color-brown-dark);
     opacity: 0.9;
   }
 
   /* CTA Section */
   .cta-section {
     padding: var(--spacing-xl) 0;
-    background: linear-gradient(135deg, rgba(74, 20, 140, 0.05) 0%, rgba(26, 35, 126, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
   }
 
   .cta-card {
@@ -539,27 +535,31 @@ const pageDescription = 'Discover the story behind MohMaya - where tradition mee
   }
 
   .btn--primary {
-    background: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-royal-blue) 100%);
+    background: var(--color-gold);
     color: white;
     box-shadow: var(--shadow-md);
+    border: 2px solid var(--color-gold);
   }
 
   .btn--primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(74, 20, 140, 0.3);
+    background: var(--color-gold-light);
+    border-color: var(--color-gold-light);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(184, 134, 11, 0.4);
   }
 
   .btn--outline {
     background-color: transparent;
-    border: 2px solid var(--color-primary-purple);
-    color: var(--color-primary-purple);
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
   }
 
   .btn--outline:hover {
-    background-color: var(--color-primary-purple);
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(184, 134, 11, 0.4);
   }
 
   @media (max-width: 640px) {

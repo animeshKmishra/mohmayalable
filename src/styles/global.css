@@ -90,10 +90,14 @@ body {
   overflow-x: hidden;
 }
 
-/* Ensure AOS elements are always visible even if AOS fails to load */
+/* AOS Fallback - Ensure content is visible after 1 second if AOS doesn't initialize */
 [data-aos] {
-  opacity: 1 !important;
-  transform: none !important;
+  animation: aosContentFallback 0.3s ease 1s forwards;
+}
+
+@keyframes aosContentFallback {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Typography */
