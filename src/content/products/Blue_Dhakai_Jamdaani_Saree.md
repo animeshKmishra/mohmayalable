@@ -19,7 +19,7 @@ This captivating one color jamdani soft cotton saree combines traditional elegan
 - **Flowing Drape** - that enhances natural grace
 - **Vibrant Royal Blue** color that makes a bold statement
 
-Perfect for day timr functions, and festive gatherings. The lightweight fabric makes it travel-friendly and easy to carry.
+Perfect for day time functions, and festive gatherings. The lightweight fabric makes it travel-friendly and easy to carry.
 
 ### Specifications
 - **Length:** 5.5 meters
